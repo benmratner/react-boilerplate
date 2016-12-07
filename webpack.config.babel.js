@@ -111,7 +111,7 @@ const baseConfig = {
     },
     resolve: {
         extensions: ['', '.js', '.jsx', '.min.js'],
-        root: path.resolve('./www/app'),
+        root: PATHS.app,
     }
 };
 
