@@ -41,7 +41,6 @@
   "dependencies": {
     "react": "^15.3.1",
     "react-dom": "^15.3.1",
-    "tinymce": "^4.4.1"
   },
   "author": "",
   "license": "ISC"
