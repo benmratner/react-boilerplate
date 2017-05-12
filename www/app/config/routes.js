@@ -1,14 +1,14 @@
 import React from 'react';
-import {Router, Route, IndexRoute, browserHistory} from 'react-router';
+import {Switch, Route} from 'react-router-dom';
+import {MainContainer, HomeContainer} from 'containers';
 
-import {MainContainer, HomeContainer} from '../containers/';
-
-const routes = (
-	<Router history={browserHistory}>
-		<Router path='/' component={MainContainer}>
-			<IndexRoute component={HomeContainer} />
-		</Router>
-	</Router>
+const router = (
+    <div id={'main'}>
+        <MainContainer />
+    	<Switch>
+    		<Route component={HomeContainer} />
+    	</Switch>
+    </div>
 	);
 
-export default routes;
+export default router;
