@@ -83,10 +83,10 @@ const baseConfig = {
         filename: "bundle.min.js"
     },
     module: {
-        loaders: [
+        rules: [
             {
                 test: /\.(jsx|js)?$/,
-                loader: 'babel',
+                loader: 'babel-loader',
                 exclude: /node_modules/,
                 query: {
                     cacheDirectory: true,
@@ -110,8 +110,8 @@ const baseConfig = {
             },]
     },
     resolve: {
-        extensions: ['', '.js', '.jsx', '.min.js'],
-        root: PATHS.app,
+        extensions: ['.js', '.jsx', '.min.js'],
+        modules: [path.resolve(__dirname, "www/app"), "node_modules"]
     }
 };
 
@@ -129,7 +129,6 @@ const devConfig = {
     devServer: {
         hot: true,
         inline: true,
-        progress: true,
         historyApiFallback: {
             index: path.resolve(PATHS.app, 'index.html'),
         },
