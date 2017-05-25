@@ -33,10 +33,13 @@ function doTheThing {
     cp -r $SCRIPT_DIR/webpack.config.babel.js webpack.config.babel.js
     echo "creating package.json..."
     sed -i "" "s/^  \"name\":.*/  \"name\": \"$name\",/" package.json
-    echo "Installing npm packages..."
-    npm install
     echo "Initializing git..."
     git init
+    echo "Creating readme..."
+    echo "## $name" > README.md
+    echo "Installing npm packages..."
+    # npm install
+    echo -e "\n \nDone! cd into your new directory and run npm start to see your new app."
 
 }
 
