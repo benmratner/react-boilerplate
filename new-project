@@ -1,0 +1,57 @@
+#!/bin/bash
+
+DIR="$(pwd)"
+SCRIPT_DIR="$( cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd )"
+echo $SCRIPT_DIR
+
+function setup {
+    echo "What is your new project called?"
+
+    read name
+
+    echo "Enter your new project directory (or leave blank to use this directory)"
+
+    read directory
+
+    if [ "$directory" = "" ]; then
+        NEW_DIR=$DIR/$name
+    else 
+        NEW_DIR=$directory/$name
+    fi
+}
+
+function doTheThing {
+
+    mkdir -p $NEW_DIR
+    cd $NEW_DIR
+
+    echo "Copying Files..."
+    cp -r $SCRIPT_DIR/www www
+    cp -r $SCRIPT_DIR/.babelrc .babelrc
+    cp -r $SCRIPT_DIR/.gitignore .gitignore
+    cp -r $SCRIPT_DIR/package.json package.json
+    cp -r $SCRIPT_DIR/webpack.config.babel.js webpack.config.babel.js
+    echo "creating package.json..."
+    sed -i "" "s/^  \"name\":.*/  \"name\": \"$name\",/" package.json
+    echo "Installing npm packages..."
+    npm install
+    echo "Initializing git..."
+    git init
+
+}
+
+setup
+
+while true; do
+    read -p "$(echo -e "I'm going to create a new project called $name at $NEW_DIR. Is that okay? [y/n] \n\b")" yn
+    case $yn in
+        [Yy]* ) doTheThing; exit;;
+        [Nn]* ) setup;;
+        * ) echo "Please enter y or n.";;
+    esac
+done
+
+
+
+
+
